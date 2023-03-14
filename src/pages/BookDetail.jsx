@@ -17,7 +17,7 @@ export const BookDetail = () => {
 
   useEffect(() => {
     obtainBookDetailById(bookId).then((data) => setDetail(data.data()))
-  }, [])
+  }, [bookId])
 
   useEffect(() => {
     if (detail) {

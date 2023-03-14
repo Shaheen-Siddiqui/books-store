@@ -21,13 +21,13 @@ export const Home = () => {
         <div>
             {/* <Button onClick={SignOutUser} size='sm' variant='secondary' className='mt-3'>log-out</Button> */}
             <CartGroup>
-            {
-                storeBooks.map((book)=>{
-                    return <BooksCard key={book.id} {...book.data()}/>
-                })
-            }
+                {
+                    storeBooks.map((book) => {
+                        return <BooksCard key={book.id} id={book.id} {...book.data()} />
+                    })
+                }
             </CartGroup>
-           
+
         </div>
     )
 }

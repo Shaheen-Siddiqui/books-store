@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, getDoc, doc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { app } from "../utils/firebase";
 
@@ -26,8 +26,13 @@ export const FireStoreContextProvider = ({ children }) => {
         return await getDownloadURL(ref(storage, path));
     }
 
+    const obtainBookDetailById = async (id) => {
+        const docRef = doc(db, 'books', id)
+        return await getDoc(docRef);
+    }
 
-    const value = { setDataInToFirestore, RetrivedDataStore, obtainImages };
+
+    const value = { setDataInToFirestore, RetrivedDataStore, obtainImages, obtainBookDetailById };
     return <fireStoreContext.Provider value={value}>{children}</fireStoreContext.Provider>
 }
 

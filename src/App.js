@@ -4,6 +4,7 @@ import { RegisterPage } from "./pages/RegisterPage";
 import { SignInUser } from "./pages/SignIn";
 import { Home } from "./pages/Home";
 import { ListOfBooks } from "./pages/ListOfBooks";
+import { BookDetail } from "./pages/BookDetail";
 
 import { NavbarComponent } from "./components/Navbar";
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="book" element={<ListOfBooks />} />
         <Route path="signin" element={<SignInUser />} />
         <Route path="/" element={<Home />} />
+        <Route path="/book/view/:bookId" element={<BookDetail/>} />
       </Routes>
     </BrowserRouter>
     </>

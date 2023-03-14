@@ -1,20 +1,33 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import { authContext } from "../context/authContext";
-import { NavbarComponent } from "../components/Navbar";
-
+import { fireStoreContext } from "../context/firestoreContext";
+import { BooksCard } from "../components/BooksCard";
+import CartGroup from "react-bootstrap/CardGroup"
 
 export const Home = () => {
     // const {SignOutUser} = useContext(authContext);
+    const { RetrivedDataStore } = useContext(fireStoreContext);
+    const [storeBooks, setStoreBooks] = useState([]);
+
+    useEffect(() => {
+        RetrivedDataStore().then((data) =>
+            setStoreBooks(data.docs))
+    }, [])
+
+
 
     return (
         <div>
-            <NavbarComponent/>
-            <Button 
-            // onClick={SignOutUser} 
-            size='sm' variant='secondary' className='mt-3'>log-out</Button>
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur veniam id laudantium laboriosam at reprehenderit minima voluptates nostrum assumenda officia!
+            {/* <Button onClick={SignOutUser} size='sm' variant='secondary' className='mt-3'>log-out</Button> */}
+            <CartGroup>
+            {
+                storeBooks.map((book)=>{
+                    return <BooksCard key={book.id} {...book.data()}/>
+                })
+            }
+            </CartGroup>
+           
         </div>
     )
 }
